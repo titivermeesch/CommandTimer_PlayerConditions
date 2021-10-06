@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'me.playbosswar.com'
+version '1.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+    maven {
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+}
+
+dependencies {
+    compileOnly 'me.playbosswar.com:commandtimer:6.0'
+    compileOnly 'org.jeasy:easy-rules-core:4.1.0'
+    compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+    compileOnly 'org.jetbrains:annotations:16.0.1'
+}
