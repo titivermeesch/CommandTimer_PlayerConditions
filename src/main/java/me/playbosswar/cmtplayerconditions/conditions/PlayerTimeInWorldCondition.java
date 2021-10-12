@@ -1,30 +1,64 @@
 package me.playbosswar.cmtplayerconditions.conditions;
 
 import me.playbosswar.cmtplayerconditions.utils.WorldTimeTracking;
+import me.playbosswar.com.api.ConditionRule;
+import me.playbosswar.com.api.NeededValue;
 import me.playbosswar.com.conditionsengine.ConditionCompare;
 import me.playbosswar.com.conditionsengine.conditions.ConditionHelpers;
 import org.bukkit.entity.Player;
-import org.jeasy.rules.annotation.Action;
-import org.jeasy.rules.annotation.Condition;
-import org.jeasy.rules.annotation.Fact;
-import org.jeasy.rules.annotation.Rule;
+import org.jeasy.rules.api.Facts;
+import org.jeasy.rules.api.Rule;
 
-@Rule(name = "TIME_IN_WORLD", description = "Check for how long the player is in the same world")
-public class PlayerTimeInWorldCondition {
+import java.util.ArrayList;
+
+public class PlayerTimeInWorldCondition implements ConditionRule {
     private final WorldTimeTracking worldTimeTracking;
 
     public PlayerTimeInWorldCondition(WorldTimeTracking worldTimeTracking) {
         this.worldTimeTracking = worldTimeTracking;
     }
-    @Condition
-    public boolean execute(@Fact("player") Player p,
-                           @Fact("conditionCompare") ConditionCompare conditionCompare,
-                           @Fact("numericValue") double numericValue) {
+
+    @Override
+    public String getName() {
+        return "TIME_IN_WORLD";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Check for how long the player is in the same world";
+    }
+
+    @Override
+    public boolean evaluate(Facts facts) {
+        Player p = facts.get("player");
+        ConditionCompare conditionCompare = facts.get("conditionCompare");
+        double numericValue = facts.get("numericValue");
+
         int secondsInWorld = worldTimeTracking.getSecondsInWorldForPlayer(p);
 
         return ConditionHelpers.calculateConditionCompare(conditionCompare, secondsInWorld, numericValue);
     }
 
-    @Action
-    public void action() {}
+    @Override
+    public void execute(Facts facts) {}
+
+    public int compareTo(Rule o) { return 0; }
+
+    @Override
+    public ArrayList<NeededValue<?>> getNeededValues() {
+        ArrayList<NeededValue<?>> values = new ArrayList<>();
+
+        values.add(new NeededValue<>(
+                "conditionCompare",
+                "Compare Rule",
+                ConditionCompare.class,
+                ConditionCompare.EQUAL));
+        values.add(new NeededValue<>(
+                "numericValue",
+                "Time in seconds",
+                Double.class,
+                0.0));
+
+        return values;
+    }
 }

@@ -5,10 +5,19 @@ import me.playbosswar.com.api.ConditionExtension;
 import me.playbosswar.cmtplayerconditions.conditions.PlayerHealthCondition;
 import me.playbosswar.cmtplayerconditions.conditions.PlayerOpCondition;
 import me.playbosswar.cmtplayerconditions.conditions.PlayerTimeInWorldCondition;
-import org.jeasy.rules.api.Rules;
+import me.playbosswar.com.api.ConditionRules;
 import org.jetbrains.annotations.NotNull;
 
 public class CommandTimerPlayerConditions extends ConditionExtension {
+    ConditionRules rules = new ConditionRules();
+
+    public CommandTimerPlayerConditions() {
+        rules.register(
+                new PlayerHealthCondition(),
+                new PlayerOpCondition(),
+                new PlayerTimeInWorldCondition(new WorldTimeTracking(getCommandTimerPlugin())));
+    }
+
     @Override
     public @NotNull String getConditionGroupName() {
         return "PLAYERS";
@@ -29,14 +38,7 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
         return "1.0";
     }
 
-    public @NotNull Rules getRules() {
-        Rules rules = new Rules();
-        ;
-        rules.register(
-                new PlayerHealthCondition(),
-                new PlayerOpCondition(),
-                new PlayerTimeInWorldCondition(new WorldTimeTracking(getCommandTimerPlugin())));
-
+    public @NotNull ConditionRules getRules() {
         return rules;
     }
 }

@@ -1,18 +1,37 @@
 package me.playbosswar.cmtplayerconditions.conditions;
 
+import me.playbosswar.com.api.ConditionRule;
+import me.playbosswar.com.api.NeededValue;
 import org.bukkit.entity.Player;
-import org.jeasy.rules.annotation.Action;
-import org.jeasy.rules.annotation.Condition;
-import org.jeasy.rules.annotation.Fact;
-import org.jeasy.rules.annotation.Rule;
+import org.jeasy.rules.api.Facts;
+import org.jeasy.rules.api.Rule;
 
-@Rule(name = "IS OP", description = "Check if player has op")
-public class PlayerOpCondition {
-    @Condition
-    public boolean execute(@Fact("player") Player p) {
+import java.util.ArrayList;
+
+public class PlayerOpCondition implements ConditionRule {
+    @Override
+    public String getName() {
+        return "IS_OP";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Check if user is OP";
+    }
+
+    @Override
+    public boolean evaluate(Facts facts) {
+        Player p = facts.get("player");
+
         return p.isOp();
     }
 
-    @Action
-    public void action() {}
+    public void execute(Facts facts) {}
+
+    public int compareTo(Rule o) { return 0; }
+
+    @Override
+    public ArrayList<NeededValue<?>> getNeededValues() {
+        return null;
+    }
 }
