@@ -1,5 +1,6 @@
 package me.playbosswar.cmtplayerconditions;
 
+import me.playbosswar.cmtplayerconditions.conditions.PlayerHasPermissionCondition;
 import me.playbosswar.cmtplayerconditions.utils.WorldTimeTracking;
 import me.playbosswar.com.api.ConditionExtension;
 import me.playbosswar.cmtplayerconditions.conditions.PlayerHealthCondition;
@@ -15,7 +16,8 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
         rules.register(
                 new PlayerHealthCondition(),
                 new PlayerOpCondition(),
-                new PlayerTimeInWorldCondition(new WorldTimeTracking(getCommandTimerPlugin())));
+                new PlayerTimeInWorldCondition(new WorldTimeTracking(getCommandTimerPlugin())),
+                new PlayerHasPermissionCondition());
     }
 
     @Override
