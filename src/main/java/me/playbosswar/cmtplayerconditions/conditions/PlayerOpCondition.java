@@ -23,6 +23,10 @@ public class PlayerOpCondition implements ConditionRule {
     public boolean evaluate(Facts facts) {
         Player p = facts.get("player");
 
+        if(p == null) {
+            return true;
+        }
+
         return p.isOp();
     }
 

@@ -26,6 +26,10 @@ public class PlayerHealthCondition implements ConditionRule {
         ConditionCompare conditionCompare = facts.get("conditionCompare");
         double numericValue = facts.get("numericValue");
 
+        if(p == null) {
+            return true;
+        }
+
         return ConditionHelpers.calculateConditionCompare(conditionCompare, p.getHealth(), numericValue);
     }
 

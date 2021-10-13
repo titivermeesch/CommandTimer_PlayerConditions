@@ -34,6 +34,10 @@ public class PlayerTimeInWorldCondition implements ConditionRule {
         ConditionCompare conditionCompare = facts.get("conditionCompare");
         double numericValue = facts.get("numericValue");
 
+        if(p == null) {
+            return true;
+        }
+
         int secondsInWorld = worldTimeTracking.getSecondsInWorldForPlayer(p);
 
         return ConditionHelpers.calculateConditionCompare(conditionCompare, secondsInWorld, numericValue);

@@ -25,6 +25,10 @@ public class PlayerHasPermissionCondition implements ConditionRule {
         Player p = facts.get("player");
         String permission = facts.get("permission");
 
+        if(p == null) {
+            return true;
+        }
+
         return p.hasPermission(permission);
     }
 
