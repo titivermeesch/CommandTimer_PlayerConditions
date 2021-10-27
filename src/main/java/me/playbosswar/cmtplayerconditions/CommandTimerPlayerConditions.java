@@ -1,11 +1,8 @@
 package me.playbosswar.cmtplayerconditions;
 
-import me.playbosswar.cmtplayerconditions.conditions.PlayerHasPermissionCondition;
+import me.playbosswar.cmtplayerconditions.conditions.*;
 import me.playbosswar.cmtplayerconditions.utils.WorldTimeTracking;
 import me.playbosswar.com.api.ConditionExtension;
-import me.playbosswar.cmtplayerconditions.conditions.PlayerHealthCondition;
-import me.playbosswar.cmtplayerconditions.conditions.PlayerOpCondition;
-import me.playbosswar.cmtplayerconditions.conditions.PlayerTimeInWorldCondition;
 import me.playbosswar.com.api.ConditionRules;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +14,10 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
                 new PlayerHealthCondition(),
                 new PlayerOpCondition(),
                 new PlayerTimeInWorldCondition(new WorldTimeTracking(getCommandTimerPlugin())),
-                new PlayerHasPermissionCondition());
+                new PlayerHasPermissionCondition(),
+                new PlayerHasRainCondition(),
+                new PlayerHasStormCondition(),
+                new PlayerIsInWorldCondition());
     }
 
     @Override
