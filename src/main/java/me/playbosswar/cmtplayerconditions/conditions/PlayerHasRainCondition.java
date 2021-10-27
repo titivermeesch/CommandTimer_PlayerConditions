@@ -2,14 +2,12 @@ package me.playbosswar.cmtplayerconditions.conditions;
 
 import me.playbosswar.com.api.ConditionRule;
 import me.playbosswar.com.api.NeededValue;
-import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class PlayerHasRainCondition implements ConditionRule {
     @Override
@@ -30,7 +28,7 @@ public class PlayerHasRainCondition implements ConditionRule {
             return true;
         }
 
-        return Objects.equals(p.getPlayerWeather(), WeatherType.DOWNFALL);
+        return p.getWorld().getClearWeatherDuration() == 0;
     }
 
     @Override
