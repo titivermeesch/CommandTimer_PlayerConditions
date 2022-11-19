@@ -29,7 +29,9 @@ public class WorldTimeTracking implements Listener {
         runnable.runTaskTimer(plugin, 10L, 20L);
     }
 
-    public void cancel() { runnable.cancel(); }
+    public void cancel() {
+        runnable.cancel();
+    }
 
     @EventHandler
     private void onJoin(PlayerJoinEvent e) {
@@ -54,5 +56,11 @@ public class WorldTimeTracking implements Listener {
         return secondsInWorld;
     }
 
-    public int getSecondsInWorldForPlayer(Player p) { return secondsInWorld.get(p); }
+    public int getSecondsInWorldForPlayer(Player p) {
+        if (!secondsInWorld.containsKey(p)) {
+            return 0;
+        }
+
+        return secondsInWorld.get(p);
+    }
 }

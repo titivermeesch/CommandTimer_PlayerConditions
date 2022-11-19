@@ -17,7 +17,8 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
                 new PlayerHasPermissionCondition(),
                 new PlayerHasRainCondition(),
                 new PlayerHasStormCondition(),
-                new PlayerIsInWorldCondition());
+                new PlayerIsInWorldCondition(),
+                new PlayerIsFlyingCondition());
     }
 
     @Override
@@ -27,7 +28,7 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
 
     @Override
     public @NotNull String[] getDescription() {
-        return new String[]{ "§7Interact with player data" };
+        return new String[]{"§7Interact with player data"};
     }
 
     @Override
@@ -37,7 +38,7 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
 
     @Override
     public @NotNull String getVersion() {
-        return "1.0";
+        return "1.1.0";
     }
 
     public @NotNull ConditionRules getRules() {

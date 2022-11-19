@@ -34,7 +34,7 @@ public class PlayerTimeInWorldCondition implements ConditionRule {
         ConditionCompare conditionCompare = facts.get("conditionCompare");
         double numericValue = facts.get("numericValue");
 
-        if(p == null) {
+        if (p == null) {
             return true;
         }
 
@@ -44,9 +44,12 @@ public class PlayerTimeInWorldCondition implements ConditionRule {
     }
 
     @Override
-    public void execute(Facts facts) {}
+    public void execute(Facts facts) {
+    }
 
-    public int compareTo(Rule o) { return 0; }
+    public int compareTo(Rule o) {
+        return 0;
+    }
 
     @Override
     public ArrayList<NeededValue<?>> getNeededValues() {
