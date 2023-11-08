@@ -1,6 +1,8 @@
 package me.playbosswar.cmtplayerconditions;
 
 import me.playbosswar.cmtplayerconditions.conditions.*;
+import me.playbosswar.cmtplayerconditions.events.PlayerBiomeChangeEvent;
+import me.playbosswar.cmtplayerconditions.events.PlayerJoinEventExtension;
 import me.playbosswar.cmtplayerconditions.utils.WorldTimeTracking;
 import me.playbosswar.com.api.ConditionExtension;
 import me.playbosswar.com.api.ConditionRules;
@@ -41,7 +43,7 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
 
     @Override
     public @NotNull String getVersion() {
-        return "1.1.1";
+        return "1.2.0";
     }
 
     public @NotNull ConditionRules getRules() {
@@ -50,6 +52,9 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
 
     @Override
     public ArrayList<EventExtension> getEvents() {
-        return new ArrayList<>();
+        ArrayList<EventExtension> events = new ArrayList<>();
+        events.add(new PlayerBiomeChangeEvent(this));
+        events.add(new PlayerJoinEventExtension(this));
+        return events;
     }
 }
