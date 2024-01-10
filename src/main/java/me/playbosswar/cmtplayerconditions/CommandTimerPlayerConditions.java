@@ -23,6 +23,7 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
                 new PlayerHasRainCondition(),
                 new PlayerHasStormCondition(),
                 new PlayerIsInWorldCondition(),
+                new PlayerIsInGamemodeCondition(),
                 new PlayerIsFlyingCondition());
     }
 
@@ -43,7 +44,7 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
 
     @Override
     public @NotNull String getVersion() {
-        return "1.2.0";
+        return "1.3.0";
     }
 
     public @NotNull ConditionRules getRules() {
