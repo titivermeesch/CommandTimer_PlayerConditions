@@ -25,7 +25,7 @@ public class PlayerHasPermissionCondition implements ConditionRule {
         Player p = facts.get("player");
         String permission = facts.get("permission");
 
-        if(p == null) {
+        if (p == null) {
             return true;
         }
 
@@ -33,7 +33,8 @@ public class PlayerHasPermissionCondition implements ConditionRule {
     }
 
     @Override
-    public void execute(Facts facts) { }
+    public void execute(Facts facts) {
+    }
 
     @Override
     public ArrayList<NeededValue<?>> getNeededValues() {

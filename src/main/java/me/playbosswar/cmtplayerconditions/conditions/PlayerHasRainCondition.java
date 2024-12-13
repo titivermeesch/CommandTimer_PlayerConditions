@@ -24,15 +24,16 @@ public class PlayerHasRainCondition implements ConditionRule {
     public boolean evaluate(Facts facts) {
         Player p = facts.get("player");
 
-        if(p == null) {
+        if (p == null) {
             return true;
         }
 
-        return p.getWorld().getClearWeatherDuration() == 0;
+        return p.getWorld().getWeatherDuration() == 0;
     }
 
     @Override
-    public void execute(Facts facts) {}
+    public void execute(Facts facts) {
+    }
 
     @Override
     public ArrayList<NeededValue<?>> getNeededValues() {

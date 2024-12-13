@@ -28,7 +28,7 @@ public class PlayerBiomeChangeEvent extends EventExtension implements Listener {
 
     @Override
     public @NotNull String[] getEventDescription() {
-        return new String[]{"Triggered when a player enters a different biome"};
+        return new String[] { "Triggered when a player enters a different biome" };
     }
 
     @Override
@@ -52,8 +52,8 @@ public class PlayerBiomeChangeEvent extends EventExtension implements Listener {
     private void handleMoveEvent(PlayerMoveEvent e) {
         Location from = e.getFrom();
         Location to = e.getTo();
-        String fromBiome = from.getWorld().getBiome(from).toString();
-        String toBiome = to.getWorld().getBiome(to).toString();
+        String fromBiome = from.getWorld().getBiome(from.getBlockX(), from.getBlockY()).toString();
+        String toBiome = to.getWorld().getBiome(to.getBlockX(), to.getBlockY()).toString();
 
         if (!fromBiome.equals(toBiome)) {
             ArrayList<NeededValue<?>> values = new ArrayList<>();
