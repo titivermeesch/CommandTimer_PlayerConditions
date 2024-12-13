@@ -26,7 +26,7 @@ public class PlayerFirstJoinEventExtension extends EventExtension implements Lis
 
     @Override
     public @NotNull String[] getEventDescription() {
-        return new String[]{"Triggered when a player joins the server for the first time"};
+        return new String[] { "Triggered when a player joins the server for the first time" };
     }
 
     @Override
@@ -45,7 +45,8 @@ public class PlayerFirstJoinEventExtension extends EventExtension implements Lis
 
         Location loc = e.getPlayer().getLocation();
         ArrayList<NeededValue<?>> values = new ArrayList<>();
-        values.add(new NeededValue<>("INITIAL_BIOME", "Initial biome on join", String.class, loc.getWorld().getBiome(loc).toString()));
+        values.add(new NeededValue<>("INITIAL_BIOME", "Initial biome on join", String.class,
+                loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockY()).toString()));
         CommandTimerPlugin.getInstance().getEventsManager().handleTriggeredEvent(extension, this, values);
     }
 }

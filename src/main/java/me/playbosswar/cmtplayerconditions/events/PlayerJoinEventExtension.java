@@ -26,7 +26,7 @@ public class PlayerJoinEventExtension extends EventExtension implements Listener
 
     @Override
     public @NotNull String[] getEventDescription() {
-        return new String[]{"Triggered when a player joins the server"};
+        return new String[] { "Triggered when a player joins the server" };
     }
 
     @Override
@@ -41,7 +41,8 @@ public class PlayerJoinEventExtension extends EventExtension implements Listener
     public void onJoin(PlayerJoinEvent e) {
         Location loc = e.getPlayer().getLocation();
         ArrayList<NeededValue<?>> values = new ArrayList<>();
-        values.add(new NeededValue<>("INITIAL_BIOME", "Initial biome on join", String.class, loc.getWorld().getBiome(loc).toString()));
+        values.add(new NeededValue<>("INITIAL_BIOME", "Initial biome on join", String.class,
+                loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockY()).toString()));
         CommandTimerPlugin.getInstance().getEventsManager().handleTriggeredEvent(extension, this, values);
     }
 }
