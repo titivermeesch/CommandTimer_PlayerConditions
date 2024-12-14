@@ -20,6 +20,14 @@ repositories {
     maven {
         url = 'https://papermc.io/repo/repository/maven-public/'
     }
+
+    maven {
+        url = 'https://maven.pkg.github.com/titivermeesch/CommandTimer'
+        credentials {
+            username = System.env.GH_REPO_USERNAME
+            password = System.env.GH_REPO_TOKEN
+        }
+    }
 }
 
 dependencies {
