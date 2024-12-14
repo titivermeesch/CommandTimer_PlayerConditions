@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   Build-Java8:
@@ -13,6 +13,9 @@ jobs:
           distribution: "adopt"
           java-version: "8"
       - run: gradle :jar
+        env:
+          GH_REPO_USERNAME: ${{ secrets.GH_REPO_USERNAME }}
+          GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
       - uses: actions/upload-artifact@v4
         with:
           name: commandtimer-playerconditions
