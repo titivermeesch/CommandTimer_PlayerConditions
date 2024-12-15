@@ -35,7 +35,7 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
 
     @Override
     public @NotNull String[] getDescription() {
-        return new String[]{"§7Interact with player data"};
+        return new String[] { "§7Interact with player data" };
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
 
     @Override
     public @NotNull String getVersion() {
-        return "1.4.0";
+        return "1.4.1";
     }
 
     public @NotNull ConditionRules getRules() {
