@@ -18,11 +18,28 @@ jobs:
           GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
       - uses: actions/upload-artifact@v4
         with:
-          name: commandtimer-playerconditions
+          name: commandtimer-playerconditions-java8
+          path: build/libs/*.jar
+  Build-Java21:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "adopt"
+          java-version: "21"
+      - run: gradle :jar -b java21-build.gradle
+        env:
+          GH_REPO_USERNAME: ${{ secrets.GH_REPO_USERNAME }}
+          GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: commandtimer-playerconditions-java21
           path: build/libs/*.jar
   Release:
     needs:
       - Build-Java8
+      - Build-Java21
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

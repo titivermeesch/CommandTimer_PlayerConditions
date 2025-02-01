@@ -26,7 +26,7 @@ public class PlayerIsInWorldCondition implements ConditionRule {
         Player p = facts.get("player");
         String worldName = facts.get("worldName");
 
-        if(p == null) {
+        if (p == null) {
             return true;
         }
 
@@ -34,7 +34,8 @@ public class PlayerIsInWorldCondition implements ConditionRule {
     }
 
     @Override
-    public void execute(Facts facts) { }
+    public void execute(Facts facts) {
+    }
 
     @Override
     public ArrayList<NeededValue<?>> getNeededValues() {
