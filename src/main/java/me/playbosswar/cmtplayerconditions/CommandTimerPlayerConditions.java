@@ -45,7 +45,7 @@ public class CommandTimerPlayerConditions extends ConditionExtension {
 
     @Override
     public @NotNull String getVersion() {
-        return "1.4.2";
+        return "1.4.3";
     }
 
     public @NotNull ConditionRules getRules() {

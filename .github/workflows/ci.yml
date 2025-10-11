@@ -12,7 +12,7 @@ jobs:
         with:
           distribution: "adopt"
           java-version: "8"
-      - run: gradle jar
+      - run: ./gradlew jar
         env:
           GH_REPO_USERNAME: ${{ secrets.GH_REPO_USERNAME }}
           GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
@@ -24,7 +24,7 @@ jobs:
         with:
           distribution: "adopt"
           java-version: "21"
-      - run: gradle jar -b java21-build.gradle
+      - run: ./gradlew jar -b java21-build.gradle
         env:
           GH_REPO_USERNAME: ${{ secrets.GH_REPO_USERNAME }}
           GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
