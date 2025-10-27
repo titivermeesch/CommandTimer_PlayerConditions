@@ -1,5 +1,6 @@
 package me.playbosswar.cmtplayerconditions.events;
 
+import me.playbosswar.cmtplayerconditions.utils.BiomeUtil;
 import me.playbosswar.com.CommandTimerPlugin;
 import me.playbosswar.com.api.ConditionExtension;
 import me.playbosswar.com.api.NeededValue;
@@ -46,7 +47,7 @@ public class PlayerFirstJoinEventExtension extends EventExtension implements Lis
         Location loc = e.getPlayer().getLocation();
         ArrayList<NeededValue<?>> values = new ArrayList<>();
         values.add(new NeededValue<>("INITIAL_BIOME", "Initial biome on join", String.class,
-                loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockY()).toString()));
+                BiomeUtil.getBiomeName(loc)));
         CommandTimerPlugin.getInstance().getEventsManager().handleTriggeredEvent(extension, this, values);
     }
 }

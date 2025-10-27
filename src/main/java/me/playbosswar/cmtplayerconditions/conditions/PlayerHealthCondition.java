@@ -4,6 +4,7 @@ import me.playbosswar.com.api.ConditionRule;
 import me.playbosswar.com.api.NeededValue;
 import me.playbosswar.com.conditionsengine.ConditionCompare;
 import me.playbosswar.com.conditionsengine.conditions.ConditionHelpers;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
@@ -22,15 +23,20 @@ public class PlayerHealthCondition implements ConditionRule {
     }
 
     public boolean evaluate(Facts facts) {
-        Player p = facts.get("player");
+        OfflinePlayer p = facts.get("player");
         ConditionCompare conditionCompare = facts.get("conditionCompare");
         double numericValue = facts.get("numericValue");
 
         if(p == null) {
-            return true;
+            return false;
         }
 
-        return ConditionHelpers.calculateConditionCompare(conditionCompare, p.getHealth(), numericValue);
+        if(!(p instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) p;
+        return ConditionHelpers.calculateConditionCompare(conditionCompare, player.getHealth(), numericValue);
     }
 
     public void execute(Facts facts) {}

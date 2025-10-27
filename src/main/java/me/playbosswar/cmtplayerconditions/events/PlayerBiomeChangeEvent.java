@@ -1,11 +1,11 @@
 package me.playbosswar.cmtplayerconditions.events;
 
+import me.playbosswar.cmtplayerconditions.utils.BiomeUtil;
 import me.playbosswar.com.CommandTimerPlugin;
 import me.playbosswar.com.api.ConditionExtension;
 import me.playbosswar.com.api.NeededValue;
 import me.playbosswar.com.api.events.EventExtension;
 import org.bukkit.Location;
-import org.bukkit.block.Biome;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -52,8 +52,8 @@ public class PlayerBiomeChangeEvent extends EventExtension implements Listener {
     private void handleMoveEvent(PlayerMoveEvent e) {
         Location from = e.getFrom();
         Location to = e.getTo();
-        String fromBiome = from.getWorld().getBiome(from.getBlockX(), from.getBlockY()).toString();
-        String toBiome = to.getWorld().getBiome(to.getBlockX(), to.getBlockY()).toString();
+        String fromBiome = BiomeUtil.getBiomeName(from);
+        String toBiome = BiomeUtil.getBiomeName(to);
 
         if (!fromBiome.equals(toBiome)) {
             ArrayList<NeededValue<?>> values = new ArrayList<>();

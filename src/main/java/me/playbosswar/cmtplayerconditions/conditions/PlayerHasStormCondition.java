@@ -3,6 +3,7 @@ package me.playbosswar.cmtplayerconditions.conditions;
 import me.playbosswar.com.api.ConditionExtension;
 import me.playbosswar.com.api.ConditionRule;
 import me.playbosswar.com.api.NeededValue;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
@@ -23,13 +24,18 @@ public class PlayerHasStormCondition implements ConditionRule {
 
     @Override
     public boolean evaluate(Facts facts) {
-        Player p = facts.get("player");
+        OfflinePlayer p = facts.get("player");
 
         if(p == null) {
-            return true;
+            return false;
         }
 
-        return p.getWorld().hasStorm();
+        if(!(p instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) p;
+        return player.getWorld().hasStorm();
     }
 
     @Override
