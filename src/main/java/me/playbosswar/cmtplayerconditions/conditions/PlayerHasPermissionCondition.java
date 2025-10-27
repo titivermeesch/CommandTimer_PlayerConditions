@@ -2,6 +2,7 @@ package me.playbosswar.cmtplayerconditions.conditions;
 
 import me.playbosswar.com.api.ConditionRule;
 import me.playbosswar.com.api.NeededValue;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
@@ -17,19 +18,25 @@ public class PlayerHasPermissionCondition implements ConditionRule {
 
     @Override
     public String getDescription() {
-        return "Check if player has the correct permission";
+        return "Check if player has the correct permission (does not support offline players)";
     }
 
     @Override
     public boolean evaluate(Facts facts) {
-        Player p = facts.get("player");
+        OfflinePlayer offlinePlayer = facts.get("player");
         String permission = facts.get("permission");
 
-        if (p == null) {
-            return true;
+        if (offlinePlayer == null) {
+            return false;
         }
 
-        return p.hasPermission(permission);
+        if (!(offlinePlayer instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) offlinePlayer;
+
+        return player.hasPermission(permission);
     }
 
     @Override

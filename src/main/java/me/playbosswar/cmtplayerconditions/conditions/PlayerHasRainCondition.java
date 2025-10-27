@@ -2,6 +2,7 @@ package me.playbosswar.cmtplayerconditions.conditions;
 
 import me.playbosswar.com.api.ConditionRule;
 import me.playbosswar.com.api.NeededValue;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
@@ -22,13 +23,18 @@ public class PlayerHasRainCondition implements ConditionRule {
 
     @Override
     public boolean evaluate(Facts facts) {
-        Player p = facts.get("player");
+        OfflinePlayer p = facts.get("player");
 
         if (p == null) {
-            return true;
+            return false;
         }
 
-        return p.getWorld().getWeatherDuration() == 0;
+        if(!(p instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) p;
+        return player.getWorld().getWeatherDuration() == 0;
     }
 
     @Override

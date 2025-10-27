@@ -5,6 +5,7 @@ import me.playbosswar.com.api.ConditionRule;
 import me.playbosswar.com.api.NeededValue;
 import me.playbosswar.com.conditionsengine.ConditionCompare;
 import me.playbosswar.com.conditionsengine.conditions.ConditionHelpers;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
@@ -30,15 +31,20 @@ public class PlayerTimeInWorldCondition implements ConditionRule {
 
     @Override
     public boolean evaluate(Facts facts) {
-        Player p = facts.get("player");
+        OfflinePlayer p = facts.get("player");
         ConditionCompare conditionCompare = facts.get("conditionCompare");
         double numericValue = facts.get("numericValue");
 
         if (p == null) {
-            return true;
+            return false;
         }
 
-        int secondsInWorld = worldTimeTracking.getSecondsInWorldForPlayer(p);
+        if (!(p instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) p;
+        int secondsInWorld = worldTimeTracking.getSecondsInWorldForPlayer(player);
 
         return ConditionHelpers.calculateConditionCompare(conditionCompare, secondsInWorld, numericValue);
     }
