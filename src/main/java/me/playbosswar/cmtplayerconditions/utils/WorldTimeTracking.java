@@ -8,29 +8,27 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
+import me.playbosswar.com.CommandTimerPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class WorldTimeTracking implements Listener {
-    private final BukkitRunnable runnable;
+    private BukkitTask task;
     private final Map<Player, Integer> secondsInWorld = new HashMap<>();
 
     public WorldTimeTracking(Plugin plugin) {
         Bukkit.getPluginManager().registerEvents(this, plugin);
-        runnable = new BukkitRunnable() {
-            @Override
-            public void run() {
-                secondsInWorld.forEach((player, value) -> secondsInWorld.put(player, value + 1));
-            }
-        };
-
-        runnable.runTaskTimer(plugin, 10L, 20L);
+        task = CommandTimerPlugin.getScheduler().runTaskTimer(() -> {
+            secondsInWorld.forEach((player, value) -> secondsInWorld.put(player, value + 1));
+        }, 10L, 20L);
     }
 
     public void cancel() {
-        runnable.cancel();
+        if (task != null) {
+            task.cancel();
+        }
     }
 
     @EventHandler
